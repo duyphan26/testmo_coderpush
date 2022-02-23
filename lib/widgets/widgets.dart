@@ -1,0 +1,1 @@
+export 'tinder_layout/tinder_layout.dart';
