@@ -141,8 +141,7 @@ class _TinderLayoutState extends State<TinderLayout> {
       fit: StackFit.loose,
       children: <Widget>[
         if (widget.matchEngine.nextItem != null)
-          DraggableCard(
-            isBackCard: true,
+          Container(
             child: Transform(
               transform: Matrix4.identity()..scale(scale, scale),
               alignment: Alignment.center,
@@ -158,7 +157,6 @@ class _TinderLayoutState extends State<TinderLayout> {
             onSlideUpdate: _onSlideUpdate,
             onSlideRegionUpdate: _onSlideRegion,
             onSlideOutComplete: _onSlideOutComplete,
-            isBackCard: false,
             child: Container(
               key: frontCardKey,
               child: widget.itemFrontBuilder(

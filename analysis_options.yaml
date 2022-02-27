@@ -7,13 +7,6 @@ analyzer:
     # allow having TODOs in the code
     todo: ignore
     missing_required_param: error
-    avoid_print: error
-  exclude:
-    # exclude files
-    - lib/i18n
-    - storybook/**
-    - environments/**
-    - test_data/**
   enable-experiment:
     - extension-methods
 
@@ -28,7 +21,6 @@ linter:
     - annotate_overrides
     - prefer_single_quotes
     - avoid_empty_else
-    - avoid_print
     - avoid_field_initializers_in_const_classes
     - avoid_init_to_null
     - avoid_null_checks_in_equality_operators

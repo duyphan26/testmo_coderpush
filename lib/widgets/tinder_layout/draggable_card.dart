@@ -7,7 +7,6 @@ enum SlideDirection { left, right, up }
 enum SlideRegion { inNope, inLike, inSuperLike }
 
 class DraggableCard extends StatefulWidget {
-  final bool isBackCard;
   final Widget child;
   final SlideDirection? slideTo;
   final ValueChanged<double>? onSlideUpdate;
@@ -16,7 +15,6 @@ class DraggableCard extends StatefulWidget {
 
   DraggableCard({
     Key? key,
-    this.isBackCard = false,
     required this.child,
     this.onSlideUpdate,
     this.onSlideOutComplete,
@@ -235,7 +233,7 @@ class _DraggableCardState extends State<DraggableCard>
         slideRegion = null;
       }
       dragPosition = details.globalPosition;
-      cardOffset = dragPosition! - dragStart!;
+      cardOffset = dragPosition! - (dragStart ?? Offset.zero);
       if (widget.onSlideUpdate != null) {
         widget.onSlideUpdate!(cardOffset!.distance);
       }
@@ -290,12 +288,6 @@ class _DraggableCardState extends State<DraggableCard>
       _initialize();
     }
 
-    if (widget.isBackCard &&
-        posBounds != null &&
-        cardOffset!.dx < posBounds!.height) {
-      cardOffset = Offset.zero;
-    }
-
     return Transform(
       transform: Matrix4.translationValues(cardOffset!.dx, cardOffset!.dy, 0.0)
         ..rotateZ(_calculateRotate(posBounds)),
@@ -304,7 +296,6 @@ class _DraggableCardState extends State<DraggableCard>
         key: layoutKey,
         width: posBounds?.width,
         height: posBounds?.height,
-        padding: EdgeInsets.zero,
         child: GestureDetector(
           onPanStart: _onPanStart,
           onPanUpdate: _onPanUpdate,
